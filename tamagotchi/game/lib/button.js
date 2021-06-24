@@ -58,6 +58,5 @@ export default class Button {
     } else {
       return false;
     }
-    //state muss sich ändern
   }
 }
