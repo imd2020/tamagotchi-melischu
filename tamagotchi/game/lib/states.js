@@ -1,4 +1,4 @@
-export default class plantStates {
+export default class PlantStates {
   constructor(nextPositivState = "false", nextNegativState = "false") {
     this.nextPositivState = nextPositivState;
     this.nextNegativState = nextNegativState;
