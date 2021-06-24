@@ -1,4 +1,4 @@
-export default class textOnScreen {
+export default class TextOnScreen {
   constructor(x, y, s, text) {
     this.xPos = x;
     this.yPos = y;
