@@ -1,8 +1,10 @@
 export default class BackgroundImg {
+  //initialising constructor variables
   constructor(x, y, s) {
     this.xPos = x;
     this.yPos = y;
     this.scale = s;
+    //source path for each screen
     this.startscreen_Img = loadImage("lib\\screens\\startscreen.png");
     this.seed_Img = loadImage("lib\\screens\\seed.png");
     this.germ_Img = loadImage("lib\\screens\\germ.png");
@@ -20,6 +22,7 @@ export default class BackgroundImg {
     );
   }
 
+  //state and source definition for each screen
   displayScreen(state) {
     let pictureSource;
     if (state === "start") {
@@ -47,6 +50,7 @@ export default class BackgroundImg {
     } else {
       console.log("No state given!");
     }
+    //define picture localisation
     image(pictureSource, 0, 0);
   }
 }
