@@ -1,6 +1,6 @@
 export default class Button {
   //initialising constructor variables
-  constructor(xPos, yPos, width, hight, scale, r, g, b) {
+  constructor(xPos, yPos, width, hight, scale, r, g, b, gsap) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;
@@ -9,6 +9,11 @@ export default class Button {
     this.r = r;
     this.g = g;
     this.b = b;
+    this.gsap = gsap;
+    this.rect = {
+      x: xPos,
+      y: yPos,
+    };
   }
 
   //draw button
@@ -17,8 +22,8 @@ export default class Button {
 
     fill(this.r, this.g, this.b);
     rect(
-      this.scale * this.xPos,
-      this.scale * this.yPos,
+      this.scale * this.rect.x,
+      this.scale * this.rect.y,
       this.scale * this.width,
       this.scale * this.hight
     );
@@ -29,8 +34,8 @@ export default class Button {
     textStyle(ITALIC);
     text(
       buttonText,
-      this.scale * this.xPos + (this.scale * this.width) / 2,
-      this.scale * this.yPos + (this.scale * this.hight) / 2 + this.scale * 2
+      this.scale * this.rect.x + (this.scale * this.width) / 2,
+      this.scale * this.rect.y + (this.scale * this.hight) / 2 + this.scale * 2
     );
   }
   //hover animation function
@@ -38,12 +43,28 @@ export default class Button {
     if (
       mouseX >= this.scale * this.xPos &&
       mouseX <= this.scale * this.xPos + this.scale * this.width &&
-      mouseY >= this.sclae * this.yPos &&
-      mouseY <= this.sclae * this.yPos + this.scale * this.hight
+      mouseY >= this.scale * this.yPos &&
+      mouseY <= this.scale * this.yPos + this.scale * this.hight
     ) {
-      console.log("im doing");
+      if (this.gsap !== "default") {
+        console.log("im doing");
 
-      this.strokeWeight(100);
+        this.gsap.to(this.rect, {
+          duration: 1,
+          ease: "yoyoEase",
+          x: 400,
+          onComplete: () => {
+            this.gsap.to(this.rect, {
+              duration: 1,
+              ease: "yoyoEase",
+              x: 400,
+              onComplete: () => {
+                console.log("ready");
+              },
+            });
+          },
+        });
+      }
     }
   }
 
