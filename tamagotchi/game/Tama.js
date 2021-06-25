@@ -3,14 +3,14 @@ import TextOnScreen from "./lib/textOnScreen.js";
 import Button from "./lib/button.js";
 import BackgroundImg from "./lib/backgroundImg.js";
 import PlantStates from "./lib/states.js";
+import gsap from "./lib/gsap.min.js";
 
 let stateChange;
-
 //initialising buttons
-let startButton = new Button(300, 550, 200, 100, 1, 255, 100, 150);
-let RestartButton = new Button(300, 250, 200, 100, 1, 255, 100, 150);
-let positivButton = new Button(500, 50, 100, 50, 1, 200, 155, 100);
-let negativButton = new Button(200, 50, 100, 50, 1, 200, 155, 100);
+let startButton = new Button(300, 550, 200, 100, 1, 255, 100, 150, gsap);
+let RestartButton = new Button(300, 250, 200, 100, 1, 255, 100, 150, gsap);
+let positivButton = new Button(450, 50, 150, 50, 1, 200, 155, 100, gsap);
+let negativButton = new Button(150, 50, 150, 50, 1, 200, 155, 100, gsap);
 
 //set background
 let backgroundImg = new BackgroundImg(100, 100, 4);
@@ -39,7 +39,7 @@ let textOnNegativEndscreen = new TextOnScreen(
 let seedState = new PlantStates("germ", "soil");
 let germState = new PlantStates("buds", "withered_germ");
 let budsState = new PlantStates("plant", "withered_buds");
-let plantState = new PlantStates("positiv_endscreen");
+let plantState = new PlantStates("positiv_endscreen", "withered_plant");
 let soilState = new PlantStates("seed");
 let withered_germState = new PlantStates("germ", "withered_plant");
 let withered_budsState = new PlantStates("buds", "withered_plant");
@@ -114,8 +114,8 @@ function draw() {
     stateChange = "notSet";
 
     //positiv and negativ button
-    negativButton.display("neg");
-    positivButton.display("pos");
+    negativButton.display("austrocknen");
+    positivButton.display("gießen");
 
     //state change if mouse is clicked
     if (negativButton.onClick(clicked)) {
