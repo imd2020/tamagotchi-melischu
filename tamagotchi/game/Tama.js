@@ -8,9 +8,9 @@ import gsap from "./lib/gsap.min.js";
 let stateChange;
 //initialising buttons
 let startButton = new Button(300, 550, 200, 100, 1, 255, 100, 150, gsap);
-let RestartButton = new Button(300, 250, 200, 100, 1, 255, 100, 150, gsap);
-let positivButton = new Button(450, 50, 150, 50, 1, 200, 155, 100, gsap);
-let negativButton = new Button(150, 50, 150, 50, 1, 200, 155, 100, gsap);
+let RestartButton = new Button(300, 250, 200, 100, 1, 255, 100, 150, "default");
+let positivButton = new Button(450, 50, 150, 50, 1, 200, 155, 100, "default");
+let negativButton = new Button(150, 50, 150, 50, 1, 200, 155, 100, "default");
 
 //set background
 let backgroundImg = new BackgroundImg(100, 100, 4);
@@ -53,6 +53,8 @@ let startState = new PlantStates("seed");
 
 let state = "start";
 let clicked = false;
+negButText = "";
+posButText = "";
 
 function draw() {
   //startscreen
@@ -65,6 +67,8 @@ function draw() {
     //if starbutton is clicked, show next state
     if (startButton.onClick(clicked)) {
       state = startState.nextState("positiv");
+      negButText = "Vogelangriff";
+      posButText = "Bewässerung";
     }
   }
   //positiv endscreen
@@ -79,7 +83,6 @@ function draw() {
       state = positiv_endscreenState.nextState("positiv");
     }
   }
-
   //negativ endscreen
   if (state === "negativ_endscreen") {
     backgroundImg.displayScreen("negativ_endscreen");
@@ -95,11 +98,18 @@ function draw() {
   //exception if state is soil
   if (state === "soil") {
     backgroundImg.displayScreen("soil");
-    //show only one button
-    positivButton.display("Samen pflanzen");
-
+    //show only one button with text
+    positivButton.display(posButText);
+    posButText = "Samen sähen";
+    if (stateChange !== "notSet") {
+      state = seedState.nextState(stateChange);
+    }
     if (positivButton.onClick(clicked)) {
       state = soilState.nextState("positiv");
+    }
+    //to make sure that it only changes the state if this vurtain button was clicked
+    if (clicked) {
+      clicked = false;
     }
   }
   //in general all other screens and screen change
@@ -110,13 +120,10 @@ function draw() {
     state !== "soil"
   ) {
     backgroundImg.displayScreen(state);
-
     stateChange = "notSet";
-
     //positiv and negativ button
-    negativButton.display("austrocknen");
-    positivButton.display("gießen");
-
+    negativButton.display(negButText);
+    positivButton.display(posButText);
     //state change if mouse is clicked
     if (negativButton.onClick(clicked)) {
       stateChange = "negativ";
@@ -124,29 +131,56 @@ function draw() {
     if (positivButton.onClick(clicked)) {
       stateChange = "positiv";
     }
+
     //state change definition
-    if (stateChange !== "notSet") {
-      if (state === "seed") {
+    //text for each button
+    if (state === "seed") {
+      negButText = "Vogelangriff";
+      posButText = "Bewässerung";
+      if (stateChange !== "notSet") {
         state = seedState.nextState(stateChange);
-      } else if (state === "germ") {
-        state = germState.nextState(stateChange);
-      } else if (state === "buds") {
-        state = budsState.nextState(stateChange);
-      } else if (state === "plant") {
-        state = plantState.nextState(stateChange);
-      } else if (state === "soil") {
-        state = soilState.nextState(stateChange);
-      } else if (state === "withered_germ") {
-        state = withered_germState.nextState(stateChange);
-      } else if (state === "withered_buds") {
-        state = withered_budsState.nextState(stateChange);
-      } else if (state === "withered_plant") {
-        state = withered_plantState.nextState(stateChange);
-      } else {
-        Console.log("StateError!");
       }
+    } else if (state === "germ") {
+      if (stateChange !== "notSet") {
+        state = germState.nextState(stateChange);
+      }
+      negButText = "Blumenerde";
+      posButText = "Anzuchterde";
+    } else if (state === "buds") {
+      if (stateChange !== "notSet") {
+        state = budsState.nextState(stateChange);
+      }
+      negButText = "Sprudelwasser";
+      posButText = "Regenwasser";
+    } else if (state === "plant") {
+      if (stateChange !== "notSet") {
+        state = plantState.nextState(stateChange);
+      }
+      negButText = "Abreißen";
+      posButText = "Pflücken";
+    } else if (state === "withered_germ") {
+      if (stateChange !== "notSet") {
+        state = withered_germState.nextState(stateChange);
+      }
+      negButText = "Trockenheit";
+      posButText = "Bewässerung";
+    } else if (state === "withered_buds") {
+      if (stateChange !== "notSet") {
+        state = withered_budsState.nextState(stateChange);
+      }
+      negButText = "Sturm";
+      posButText = "Regen";
+    } else if (state === "withered_plant") {
+      if (stateChange !== "notSet") {
+        state = withered_plantState.nextState(stateChange);
+      }
+      negButText = "abreißen";
+      posButText = "ausbuddeln";
+    } else {
+      Console.log("StateError!");
     }
   }
+  //to make sure that it only changes the state if this vurtain button was clicked
   if (clicked) {
     clicked = false;
   }
