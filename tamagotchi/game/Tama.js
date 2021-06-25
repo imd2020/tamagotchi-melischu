@@ -1,30 +1,33 @@
+//connect data with main project
 import TextOnScreen from "./lib/textOnScreen.js";
 import Button from "./lib/button.js";
 import BackgroundImg from "./lib/backgroundImg.js";
 import PlantStates from "./lib/states.js";
 
+let stateChange;
+
+//initialising buttons
 let startButton = new Button(300, 550, 200, 100, 1, 255, 100, 150);
 let RestartButton = new Button(300, 250, 200, 100, 1, 255, 100, 150);
 let positivButton = new Button(500, 50, 100, 50, 1, 200, 155, 100);
 let negativButton = new Button(200, 50, 100, 50, 1, 200, 155, 100);
-let stateChange;
+
 //set background
 let backgroundImg = new BackgroundImg(100, 100, 4);
 
+//initialising text on screen with parameters
 let textonStartScreen = new TextOnScreen(
   360,
   430,
   5,
   "Versuche mit Hilfe von verschiedenen Auswahlmöglichkeiten\n Betti Bloom zum Blühen zu bringen!"
 );
-
 let textOnPositivEndscreen = new TextOnScreen(
   360,
   200,
   5,
   "Betti Bloom blüht in voller Schönheit!"
 );
-
 let textOnNegativEndscreen = new TextOnScreen(
   360,
   200,
@@ -32,6 +35,7 @@ let textOnNegativEndscreen = new TextOnScreen(
   "Oh nein Betti Bloom ist vertrocknet!"
 );
 
+//states and their next fllowing positiv and negativ states
 let seedState = new PlantStates("germ", "soil");
 let germState = new PlantStates("buds", "withered_germ");
 let budsState = new PlantStates("plant", "withered_buds");
@@ -51,44 +55,54 @@ let state = "start";
 let clicked = false;
 
 function draw() {
+  //startscreen
   if (state === "start") {
     backgroundImg.displayScreen("start");
     textonStartScreen.display();
-    //startscreen
+    //show startbutton
     startButton.display("go!");
     startButton.onHover();
+    //if starbutton is clicked, show next state
     if (startButton.onClick(clicked)) {
       state = startState.nextState("positiv");
     }
   }
+  //positiv endscreen
   if (state === "positiv_endscreen") {
     backgroundImg.displayScreen("positiv_endscreen");
     textOnPositivEndscreen.display();
-    //startscreen
+    //show restart button on positiv endscreen
     RestartButton.display("new Game");
     startButton.onHover();
+    //if restart button is clicked, show startscreen
     if (RestartButton.onClick(clicked)) {
       state = positiv_endscreenState.nextState("positiv");
     }
   }
+
+  //negativ endscreen
   if (state === "negativ_endscreen") {
     backgroundImg.displayScreen("negativ_endscreen");
     textOnNegativEndscreen.display();
-    //startscreen
+    //show restart button on negativ endscreen
     RestartButton.display("restart!");
     startButton.onHover();
+    //if restart button is clicked, show startscreen
     if (RestartButton.onClick(clicked)) {
       state = negativ_endscreenState.nextState("positiv");
     }
   }
+  //exception if state is soil
   if (state === "soil") {
     backgroundImg.displayScreen("soil");
+    //show only one button
     positivButton.display("Samen pflanzen");
 
     if (positivButton.onClick(clicked)) {
       state = soilState.nextState("positiv");
     }
   }
+  //in general all other screens and screen change
   if (
     state !== "start" &&
     state !== "positiv_endscreen" &&
@@ -103,13 +117,14 @@ function draw() {
     negativButton.display("neg");
     positivButton.display("pos");
 
+    //state change if mouse is clicked
     if (negativButton.onClick(clicked)) {
       stateChange = "negativ";
     }
-
     if (positivButton.onClick(clicked)) {
       stateChange = "positiv";
     }
+    //state change definition
     if (stateChange !== "notSet") {
       if (state === "seed") {
         state = seedState.nextState(stateChange);
@@ -140,5 +155,7 @@ function draw() {
 function mouseClicked() {
   clicked = true;
 }
+
+//html translation
 window.draw = draw;
 window.mouseClicked = mouseClicked;
