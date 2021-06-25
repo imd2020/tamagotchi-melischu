@@ -1,4 +1,5 @@
 export default class Button {
+  //initialising constructor variables
   constructor(xPos, yPos, width, hight, scale, r, g, b) {
     this.xPos = xPos;
     this.yPos = yPos;
@@ -32,7 +33,7 @@ export default class Button {
       this.scale * this.yPos + (this.scale * this.hight) / 2 + this.scale * 2
     );
   }
-
+  //hover animation function
   onHover() {
     if (
       mouseX >= this.scale * this.xPos &&
@@ -46,6 +47,7 @@ export default class Button {
     }
   }
 
+  //click function
   onClick(clicked) {
     if (
       clicked &&
