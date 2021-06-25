@@ -57,7 +57,7 @@ export default class Button {
             this.gsap.to(this.rect, {
               duration: 1,
               ease: "yoyoEase",
-              x: 400,
+              x: this.xPos,
               onComplete: () => {
                 console.log("ready");
               },
