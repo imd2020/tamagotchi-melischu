@@ -1,4 +1,4 @@
-import gsap from "/.gsap.min.js";
+//import gsap from "/.gsap.min.js";
 
 const imdRechteck = {
   x: 10,
