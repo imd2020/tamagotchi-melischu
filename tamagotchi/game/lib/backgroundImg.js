@@ -5,20 +5,20 @@ export default class BackgroundImg {
     this.yPos = y;
     this.scale = s;
     //source path for each screen
-    this.startscreen_Img = loadImage("lib\\screens\\startscreen.png");
-    this.seed_Img = loadImage("lib\\screens\\seed.png");
-    this.germ_Img = loadImage("lib\\screens\\germ.png");
-    this.buds_Img = loadImage("lib\\screens\\buds.png");
-    this.plant_Img = loadImage("lib\\screens\\plant.png");
-    this.soil_Img = loadImage("lib\\screens\\soil.png");
-    this.withered_germ_Img = loadImage("lib\\screens\\withered_germ.png");
-    this.withered_buds_Img = loadImage("lib\\screens\\withered_buds.png");
-    this.withered_plant_Img = loadImage("lib\\screens\\withered_plant.png");
+    this.startscreen_Img = loadImage("./lib/screens/startscreen.png");
+    this.seed_Img = loadImage("./lib/screens/seed.png");
+    this.germ_Img = loadImage("./lib/screens/germ.png");
+    this.buds_Img = loadImage("./lib/screens/buds.png");
+    this.plant_Img = loadImage("./lib/screens/plant.png");
+    this.soil_Img = loadImage("./lib/screens/soil.png");
+    this.withered_germ_Img = loadImage("./lib/screens/withered_germ.png");
+    this.withered_buds_Img = loadImage("./lib/screens/withered_buds.png");
+    this.withered_plant_Img = loadImage(".lib/screens/withered_plant.png");
     this.positiv_endscreen_Img = loadImage(
-      "lib\\screens\\negativ_endscreen.png"
+      "./lib/screens/negativ_endscreen.png"
     );
     this.negativ_endscreen_Img = loadImage(
-      "lib\\screens\\positiv_endscreen.png"
+      "./lib/screens/positiv_endscreen.png"
     );
   }
 
