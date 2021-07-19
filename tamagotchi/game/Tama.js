@@ -3,7 +3,6 @@ import TextOnScreen from "./lib/textOnScreen.js";
 import Button from "./lib/button.js";
 import BackgroundImg from "./lib/backgroundImg.js";
 import PlantStates from "./lib/states.js";
-//import gsap from "./lib/gsap.min.js";
 
 let stateChange;
 //initialising buttons

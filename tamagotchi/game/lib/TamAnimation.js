@@ -1,5 +1,3 @@
-//import gsap from "/.gsap.min.js";
-
 const imdRechteck = {
   x: 10,
   y: 0,
