@@ -1,9 +1,9 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(745, 745);
   frameRate(30);
 }
 
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   resizeCanvas(windowWidth, windowHeight);
   clear();
 });
