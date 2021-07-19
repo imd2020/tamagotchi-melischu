@@ -13,7 +13,7 @@ export default class BackgroundImg {
     this.soil_Img = loadImage("./lib/screens/soil.PNG");
     this.withered_germ_Img = loadImage("./lib/screens/withered_germ.PNG");
     this.withered_buds_Img = loadImage("./lib/screens/withered_buds.PNG");
-    this.withered_plant_Img = loadImage(".lib/screens/withered_plant.PNG");
+    this.withered_plant_Img = loadImage("./lib/screens/withered_plant.PNG");
     this.positiv_endscreen_Img = loadImage(
       "./lib/screens/negativ_endscreen.PNG"
     );
