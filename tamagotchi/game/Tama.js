@@ -34,7 +34,7 @@ let textOnNegativEndscreen = new TextOnScreen(
   "Oh nein Betti Bloom ist vertrocknet!"
 );
 
-//states and their next fllowing positiv and negativ states
+//states and their next following positiv and negativ states
 let seedState = new PlantStates("germ", "soil");
 let germState = new PlantStates("buds", "withered_germ");
 let budsState = new PlantStates("plant", "withered_buds");
@@ -179,7 +179,7 @@ function draw() {
       Console.log("StateError!");
     }
   }
-  //to make sure that it only changes the state if this vurtain button was clicked
+  //to make sure that it only changes the state if this curtain button was clicked
   if (clicked) {
     clicked = false;
   }
